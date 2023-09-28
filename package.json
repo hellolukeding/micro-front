@@ -1,0 +1,16 @@
+{
+  "name": "yarn-workspace",
+  "packageManager": "yarn@4.0.0-rc.51",
+  "private": true,
+  "scripts": {
+    "start": "yarn workspaces foreach -A run start"
+  },
+  "workspaces": [
+    "packages/*",
+    "libs/*",
+    "services/*"
+  ],
+  "devDependencies": {
+    "cross-env": "^7.0.3"
+  }
+}

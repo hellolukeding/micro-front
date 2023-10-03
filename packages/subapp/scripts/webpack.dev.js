@@ -6,18 +6,13 @@ module.exports = merge(base, {
   mode: "development", // 开发模式
   devServer: {
     open: true, // 编译完自动打开浏览器
-    port: 8080,
+    port: 8081,
     hot: true, // 开启热更新
     liveReload: true,//开启实时刷新
-    proxy: {
-      '/subapp': {
-        target: 'http://localhost:8081',
-        changeOrigin: true,
-        pathRewrite: {
-          '^subapp': ''
-        }
-      },
-    }
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+    historyApiFallback: true,
   },
   // webpack.dev.js
   module: {

@@ -4,8 +4,13 @@ const {name} = require('../package.json')
 module.exports = {
   entry: path.resolve(__dirname, "../index.tsx"),
   output: {
+    // publicPath: '/subapp/', // 配置子应用的发布路径
+    library: `${name}-[name]`, // 导出的子应用名
+    libraryTarget: "umd", // 把子应用打包成 umd 库格式
+    chunkLoadingGlobal: `webpackJsonp_${name}`, // 全局变量名
     path: path.resolve(__dirname, "../dist"), // 打包后的代码放在dist目录下
-    filename: `${name}.[name].[hash:8].js`, // 打包的文件名
+    filename: "[name].[hash:8].js", // 打包的文件名
+    globalObject: "window", // 把子应用打包成 umd 库格式时，需要设置该属性
   },
   resolve: {
     // 配置 extensions 来告诉 webpack 在没有书写后缀时，以什么样的顺序去寻找文件

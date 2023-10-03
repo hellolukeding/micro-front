@@ -3,6 +3,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
   entry: path.resolve(__dirname, "../index.tsx"),
+  devtool: "source-map",
   output: {
     path: path.resolve(__dirname, "../dist"), // 打包后的代码放在dist目录下
     filename: "[name].[hash:8].js", // 打包的文件名

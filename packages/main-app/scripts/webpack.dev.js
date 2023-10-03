@@ -9,15 +9,19 @@ module.exports = merge(base, {
     port: 8080,
     hot: true, // 开启热更新
     liveReload: true,//开启实时刷新
-    proxy: {
-      '/subapp': {
-        target: 'http://localhost:8081',
-        changeOrigin: true,
-        pathRewrite: {
-          '^subapp': ''
-        }
+    watchFiles: [],
+    historyApiFallback: true,
+    compress: true,
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+    },
+    client: {
+      progress: true,
+      overlay: {
+        errors: true,
+        warnings: false,
       },
-    }
+    },
   },
   // webpack.dev.js
   module: {

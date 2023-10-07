@@ -3,8 +3,14 @@
 ## 说明
 
 > 先安装[volta](https://volta.sh/)
-> 在此目录执行`yarn - v `
+> 在此目录执行`yarn - v`
 > 在此目录执行`node -v`
+
+## 目录结构
+
+> |\_libs 组件库
+> |\_packages 微前端主应用和子应用
+> |\_services 通用库 如通用请求库等
 
 ## monorepo
 
@@ -121,3 +127,21 @@ yarn workspaces foreach -ptR --from '{workspace-a,workspace-b}' run build
 > 6.  日常开发应当在 workspace-root 目录下
 >     这是对规范 5 补充，确保全局代码规范能够生效；  
 >     也能让开发者方便查看 yarn workspace link 的 Packages
+
+# 本地通用库开发
+
+> 本地通用库开发采取`tsdx`开发
+> ![](https://cdn.ipfsscan.io/ipfs/QmTKox7nq3iR2yd4srJmXdEDQCgv6MTiwARSVsTceCnRGk?filename=image.png) > ![](https://cdn.ipfsscan.io/ipfs/QmRsUqxzYydwZ1haCJtEP64n2zMUJe947LeNRDUfZ5eLFY?filename=image.png)
+
+## 引入
+
+```bash
+# 方式1
+yarn workspace [workspace名称] add [包名@具体版本号]
+# 方式2
+cd ./子项目内
+yarn add [包名@具体版本号]
+# e.g.
+yarn workspace subapp add mylib@0.1.0
+yarn workspace mainapp add myService@0.1.0
+```

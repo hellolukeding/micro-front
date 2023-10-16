@@ -5,6 +5,7 @@ import { BrowserRouter } from "react-router-dom";
 import App from "./src/App";
 let root: ReactDOM.Root;
 
+
 if (window.__POWERED_BY_QIANKUN__) {
   // 设置publicPath
   //@ts-ignore
@@ -13,7 +14,6 @@ if (window.__POWERED_BY_QIANKUN__) {
 // 将render方法用函数包裹，供后续主应用与独立运行调用
 function render(props: any) {
   const { container } = props;
-  console.log("container", container);
 
   let dom: HTMLElement;
   if (container) {
@@ -60,4 +60,5 @@ export async function unmount(props: any) {
 //
 export async function update() {
   // 更新微应用
+  console.log("update")
 }

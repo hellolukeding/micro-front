@@ -12,5 +12,9 @@
   ],
   "devDependencies": {
     "cross-env": "^7.0.3"
+  },
+  "volta":{
+    "node": "20.7.0",
+    "yarn": "4.0.0"
   }
 }

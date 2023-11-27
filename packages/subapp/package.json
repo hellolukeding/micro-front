@@ -1,6 +1,7 @@
 {
   "name": "subapp",
   "packageManager": "yarn@4.0.0-rc.51",
+  "version": "1.0.0",
   "scripts": {
     "start": "cross-env NODE_ENV=QK_dev webpack serve -c scripts/webpack.dev.js",
     "start:dev": "cross-env NODE_ENV=dev webpack serve -c scripts/webpack.dev.js",

@@ -1,5 +1,5 @@
 import {exec} from 'child_process';
-import {DividedWorkSpace, getWorkSpacePromiseResult} from "../types/types";
+import {DividedWorkSpace, getWorkSpacePromiseResult} from "../types/types.js";
 // 获取所有的workspace
 const getWorkSpacePromise = (): Promise<getWorkSpacePromiseResult> => {
   return new Promise((resolve, reject) => {
@@ -31,7 +31,7 @@ const bootstrap = async (): Promise<DividedWorkSpace> => {
   const mainapp: getWorkSpacePromiseResult[] = [];
   const subapps: getWorkSpacePromiseResult[] = [];
   Object.keys(info).forEach((key) => {
-    const item = info[key];
+    const item = info[key]!;
     if (item.location.includes("services")) {
       services.push({[key]: item});
     } else if (item.location.includes("libs")) {

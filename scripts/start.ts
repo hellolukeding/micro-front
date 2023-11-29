@@ -1,15 +1,16 @@
+import chalk from "chalk";
 import {spawn} from "child_process";
-import bootstrap from "./bootstrap/bootstrap";
-import {DividedWorkSpace} from "./types/types";
+import bootstrap from "./bootstrap/bootstrap.js";
+import {DividedWorkSpace} from "./types/types.js";
 /*--------------------------------------- run ------------------------------------------*/
 async function run(workspace: DividedWorkSpace) {
   const runList = ["services", "libs", "mainapp", "subapps"];
   for (let i = 0;i < runList.length;i++) {
     const name = runList[i];
-    const apps = workspace[name];
+    const apps = workspace[name!]!;
 
     apps.forEach((app) => {
-      const workspace = Object.keys(app)[0];
+      const workspace = Object.keys(app)[0]!;
       console.log(workspace);
       const childProcess = spawn("yarn", ["workspace", workspace, "start"], {
         stdio: ["inherit", "pipe", "pipe"],
@@ -17,22 +18,24 @@ async function run(workspace: DividedWorkSpace) {
       });
 
       childProcess.stdout.on('data', data => {
-        console.log(`🎉  ------------------子进程 ${workspace}  `);
-        console.log(`子进程 ${workspace} 输出: ${data}`);
+        console.log(chalk.bgCyanBright.greenBright(`🎉  ------------------子进程 ${workspace}  `));
+
+        console.log(chalk.green(`子进程 ${workspace} 输出: \n${data}`));
       });
 
-      // 监听子进程的错误流
       childProcess.stderr.on('data', data => {
-        console.log(`👀  ------------------子进程 ${workspace}  `);
+        console.log(chalk.bgCyanBright.greenBright(`👀  ------------------子进程 ${workspace}  `));
+        console.log(chalk.cyanBright(`子进程 ${workspace} 输出: \n${data}`));
 
-        console.error(`子进程 ${workspace} 输出: ${data}`);
       });
 
-      // 监听子进程的退出事件
       childProcess.on('exit', (code, signal) => {
-        console.log(`✋  ------------------子进程 ${workspace}  `);
-
-        console.log(`子进程 ${workspace}  退出，退出码: ${code}`);
+        console.log(chalk.yellowBright(`✋  ------------------子进程 ${workspace}  `));
+        if (code === 0) {
+          console.log(`子进程 ${workspace}  退出成功！`);
+        } else {
+          console.log(chalk.redBright(`子进程 ${workspace}  异常退出，退出码${code}，请查看控制台输出情况！`));
+        }
       });
     });
   }
